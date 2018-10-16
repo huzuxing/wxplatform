@@ -1,0 +1,10 @@
+
+<view class="search">
+  <view class="location">
+    成都市
+  </view>
+  <view id="triangle-up">
+  </view>
+</view>
+
+ 
