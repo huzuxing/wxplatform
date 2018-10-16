@@ -3,7 +3,11 @@
   <view class="location">
     成都市
   </view>
-  <view id="triangle-up">
+  <view class="triangle-up">
+  </view>
+  <view class="search_input_view">
+    <icon size='12' type='search'></icon>
+    <input class='search_input' placeholder-class="search_placeholder" auto-focus placeholder="找服务、找需求"/>
   </view>
 </view>
 
