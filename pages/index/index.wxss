@@ -154,7 +154,8 @@
   padding-right: 10rpx;
 }
 
-.content_list {
-  width: 90%;
+.content_container {
+  width: 93%;
   margin: auto;
 }
+

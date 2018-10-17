@@ -1,2 +1,38 @@
 <!--common/component/cell/cell.wxml-->
-<view class="content_cell"></view>
+<view class="content_cell">
+  <view class="user_info">
+    <image class="user_img"></image>
+    <view class="content_cell_right">
+      <view class="user_name content_font">
+        <view class="tag">龙门江湖</view>
+        <view class="tag">联系他</view>
+      </view>
+      <view class="content_ext">
+        <van-tag class="tag" plain type="danger">置顶</van-tag >
+        <van-tag class="tag" plain type="primary">软件硬件</van-tag >
+      </view>
+    </view>
+  </view>
+  <view class="content_desc content_font">
+    1. 本科及以上学历，计算机相关专业
+
+    2. 1~3年JAVA开发经验，熟悉面向对象的程序设计，有良好的计算机和网络基础知识。
+
+    3. 有良好的编码风格，能够完成规范，优质，高效的代码。
+
+    4. 熟悉Spring，Hibernate ，MySQL等常用框架和数据库。
+
+    5. 能够阅读英文文档，有良好的文档撰写能力。
+
+    6. 具有较强的团队意识，学习能力较强，能吃苦耐劳。
+  </view>
+  <view class="content_pic">
+    <image class='cell_thumbnail'></image>
+    <image class='cell_thumbnail'></image>
+    <image class='cell_thumbnail'></image>
+    <image class='cell_thumbnail'></image>
+  </view>
+  <view class="publish_time">发布时间：2018-10-17 21:11</view>
+  <view class="publish_address content_font">四川省成都市高新区天府软件园</view>
+  <view></view>
+</view>
