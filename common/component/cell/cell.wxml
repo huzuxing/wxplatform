@@ -1,0 +1,2 @@
+<!--common/component/cell/cell.wxml-->
+<view class="content_cell"></view>

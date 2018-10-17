@@ -4,8 +4,76 @@ const app = getApp()
 
 Page({
   data: {
+    active : 0,
     countryList: ['中国', '美国', '英国', '日本', '韩国', '巴西', '德国'],
-    region:["四川省","成都市","高新区"]
+    region:["四川省","成都市","高新区"],
+    cates:[
+      {
+        "id":1,
+        "name":"租房",
+        "icon":"images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 2,
+        "name": "旅游",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 3,
+        "name": "教育",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 4,
+        "name": "母婴",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 5,
+        "name": "软件硬件",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 6,
+        "name": "跑腿",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 7,
+        "name": "餐饮",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 8,
+        "name": "二手书籍",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 9,
+        "name": "租房",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 9,
+        "name": "租房",
+        "icon": "images/ic_menu_me_pressed.png"
+      }
+    ],
+    noticeList:[
+      {
+        "id":1,
+        "title":"2018.11.1 停机维护"
+      },
+      {
+        "id": 2,
+        "title": "新产品推出"
+      },
+      {
+        "id": 3,
+        "title": "快讯与腾讯达成战略合作"
+      }
+    ],
+    "test":12
   },
   changeRegion: function(e) {
     this.setData({region : e.detail.value})
