@@ -35,7 +35,7 @@
   <view class="publish_time">发布时间：2018-10-17 21:11</view>
   
   <view class="publish_address content_font">
-    <image class="map_pic" src="../../../static/images/map.png"></image>
+    <image class="map_pic" src="../../../static/img/map.png"></image>
     四川省成都市高新区天府软件园
   </view>
   <view></view>

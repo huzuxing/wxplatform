@@ -1,43 +1,38 @@
 {
   "pages": [
-    "pages/publish/publish",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/catalog/catalog",
-    "pages/ucenter/index/index",
-    "common/component/cell/cell"
+    "pages/publish/index",
+    "common/component/cell/cell",
+    "common/component/cates_grid/index",
+    "pages/publish/detail",
+    "pages/ucenter/index"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FA5858",
-    "navigationBarTitleText": "快讯",
-    "navigationBarTextStyle": "black"
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#db4f4f",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "static/images/ic_menu_choice_nor.png",
-        "selectedIconPath": "static/images/ic_menu_choice_pressed.png",
-        "text": "首页"
+        "iconPath": "static/img/ic_menu_choice_nor.png",
+        "selectedIconPath": "static/img/ic_menu_choice_pressed.png",
+        "text": "分类信息"
       },
       {
-        "pagePath": "pages/publish/publish",
-        "iconPath": "static/images/tab_add.png",
-        "selectedIconPath": "static/images/tab_add_press.png",
+        "pagePath": "pages/publish/index",
+        "iconPath": "static/img/tab_add.png",
+        "selectedIconPath": "static/img/tab_add_press.png",
         "text": "发布"
       },
       {
-        "pagePath": "pages/ucenter/index/index",
-        "iconPath": "static/images/ic_menu_me_nor.png",
-        "selectedIconPath": "static/images/ic_menu_me_pressed.png",
+        "pagePath": "pages/ucenter/index",
+        "iconPath": "static/img/ic_menu_me_nor.png",
+        "selectedIconPath": "static/img/ic_menu_me_pressed.png",
         "text": "个人中心"
       }
     ]
-  },
-  "networkTimeout": {
-    "request": 10000,
-    "downloadFile": 10000
-  },
-  "debug": true
+  }
 }

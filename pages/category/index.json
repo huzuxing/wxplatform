@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "分类信息",
+  "usingComponents": {
+    "van-tab": "../../dist/tab/index",
+    "van-tabs": "../../dist/tabs/index",
+    "cate-cell": "../../common/component/cell/cell",
+    "cates-grid": "../../common/component/cates_grid/index"
+  }
+}

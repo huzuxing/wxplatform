@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发布信息",
+  "usingComponents": {
+    "cates-grid": "../../common/component/cates_grid/index"
+  }
+}
