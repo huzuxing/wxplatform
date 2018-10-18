@@ -10,7 +10,8 @@ Page({
     linkman: "",
     location:'',
     areaIndex: 0,
-    cates: [
+    channelIndex:0,
+    channels: [
       {
         "id": 1,
         "name": "租房",
@@ -87,7 +88,8 @@ Page({
     // 位置信息
     util.getLocation((res) => {
       that.setData({
-        location: res
+         location: res.province+res.city+res.district+res.street_number
+        //location:res
       })
     });
     // 用户名- getUserInfo不可用,如需用户名，需要强制获取用户信息授权
@@ -152,6 +154,11 @@ Page({
     console.log('选择发布地区，携带值为', e.detail.value)
     this.setData({
       areaIndex: e.detail.value
+    })
+  },
+  onChannelPickerChange: function(e) {
+    this.setData({
+      channelIndex: e.detail.value
     })
   },
   onTopChange: function(e) {

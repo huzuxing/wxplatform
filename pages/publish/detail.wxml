@@ -15,8 +15,8 @@
 
     <view class='input_form'>
      
-      <picker bindchange='onAreaPickerChange' value="{{areaIndex}}" range="{{cates}}" range-key='name'>
-        <van-field name='area' value="{{areaOptions[areaIndex].name}}" is-link label="发布栏目：" disabled='true' />
+      <picker bindchange='onChannelPickerChange' value="{{channelIndex}}" range="{{channels}}" range-key='name'>
+        <van-field name='area' value="{{channels[channelIndex].name}}" is-link label="发布栏目：" disabled='true' />
       </picker>
 
       <van-field name='linkman' value="{{linkman}}" clearable label="联系人：" placeholder="请输入联系人" />

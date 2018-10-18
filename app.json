@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/location/index",
     "pages/publish/index",
     "common/component/cell/cell",
     "common/component/cates_grid/index",
