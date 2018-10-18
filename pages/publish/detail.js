@@ -10,6 +10,58 @@ Page({
     linkman: "",
     location:'',
     areaIndex: 0,
+    cates: [
+      {
+        "id": 1,
+        "name": "租房",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 2,
+        "name": "旅游",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 3,
+        "name": "教育",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 4,
+        "name": "母婴",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 5,
+        "name": "软件硬件",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 6,
+        "name": "跑腿",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 7,
+        "name": "餐饮",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 8,
+        "name": "二手书籍",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 9,
+        "name": "租房",
+        "icon": "images/ic_menu_me_pressed.png"
+      },
+      {
+        "id": 9,
+        "name": "租房",
+        "icon": "images/ic_menu_me_pressed.png"
+      }
+    ],
     areaOptions:[
       {
         id: 0,
