@@ -76,3 +76,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.map_pic {
+  width: 40rpx;
+  height: 34rpx;
+   display: flex;
+}

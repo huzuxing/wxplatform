@@ -1,20 +1,10 @@
-import { create } from '../common/create';
+'use strict';
 
-create({
-  props: {
-    info: null,
-    name: String,
-    size: String,
-    color: String,
-    classPrefix: {
+Component({
+  properties: {
+    type: {
       type: String,
-      value: 'van-icon'
-    }
-  },
-
-  methods: {
-    onClick() {
-      this.$emit('click');
+      value: ''
     }
   }
 });

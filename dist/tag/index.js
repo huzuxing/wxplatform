@@ -1,9 +1,19 @@
-import { create } from '../common/create';
+'use strict';
 
-create({
-  props: {
-    type: String,
-    mark: Boolean,
-    plain: Boolean
+Component({
+  externalClasses: ['custom-class', 'theme-class'],
+
+  properties: {
+    type: {
+      type: String
+    },
+    plain: {
+      type: Boolean,
+      value: false
+    },
+    disabled: {
+      type: Boolean,
+      value: false
+    }
   }
 });

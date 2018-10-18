@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/publish/publish",
     "pages/index/index",
     "pages/logs/logs",
     "pages/catalog/catalog",
@@ -21,9 +22,9 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/catalog/catalog",
-        "iconPath": "static/images/ic_menu_sort_nor.png",
-        "selectedIconPath": "static/images/ic_menu_sort_pressed.png",
+        "pagePath": "pages/publish/publish",
+        "iconPath": "static/images/tab_add.png",
+        "selectedIconPath": "static/images/tab_add_press.png",
         "text": "发布"
       },
       {

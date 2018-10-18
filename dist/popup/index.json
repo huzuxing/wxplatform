@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "van-overlay": "../overlay/index"
-  }
+    "pop-manager": "../common/pop-manager/index"
+  } 
 }

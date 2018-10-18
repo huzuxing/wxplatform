@@ -1,48 +1,72 @@
-import { create } from '../common/create';
+'use strict';
 
-create({
-  field: true,
-
-  classes: ['cancel-class'],
-
-  props: {
-    focus: Boolean,
-    disabled: Boolean,
-    readonly: Boolean,
-    showAction: Boolean,
-    useActionSlot: Boolean,
-    placeholder: String,
-    background: {
-      type: String,
-      value: '#f2f2f2'
-    },
-    maxlength: {
-      type: Number,
-      value: -1
-    }
+Component({
+  externalClasses: ['search-class', 'input-class', 'cancel-class'],
+  options: {
+    multipleSlots: true // 在组件定义时的选项中启用多slot支持
   },
-
+  properties: {
+    cancelText: {
+      type: String,
+      value: '取消'
+    },
+    disabled: {
+      type: Boolean,
+      value: false
+    },
+    focus: {
+      type: Boolean,
+      value: false
+    },
+    keyword: {
+      type: String,
+      value: ''
+    },
+    show: {
+      type: Array,
+      value: ['icon', 'cancel']
+    },
+    placeholder: {
+      type: String,
+      value: '请输入查询关键字',
+      observer: function observer(newVal) {
+        this.setData({
+          inputWidth: newVal.length * 14 + 45 + 'px'
+        });
+      }
+    },
+    useCancel: {
+      type: Boolean
+    },
+    searchStyle: String,
+    cancelStyle: String,
+    inputStyle: String
+  },
+  data: {
+    inputWidth: 'auto'
+  },
   methods: {
-    onChange(event) {
-      this.$emit('change', event.detail);
+    blur: function blur() {
+      this.triggerEvent('blur');
     },
-
-    onCancel() {
-      this.setData({ value: '' });
-      this.$emit('cancel');
-      this.$emit('change', '');
+    clearInput: function clearInput() {
+      this.setData({
+        focus: true
+      });
+      this.triggerEvent('change', { value: '' });
     },
-
-    onSearch() {
-      this.$emit('search', this.data.value);
+    cancelSearch: function cancelSearch() {
+      this.triggerEvent('cancel');
     },
-
-    onFocus() {
-      this.$emit('focus');
+    focus: function focus() {
+      this.triggerEvent('focus');
     },
-
-    onBlur() {
-      this.$emit('blur');
+    inputChange: function inputChange(e) {
+      this._inputvalue = e.detail.value;
+      this.triggerEvent('change', { value: e.detail.value });
+    },
+    search: function search(e) {
+      this.triggerEvent('search', { value: e.detail.value });
     }
   }
 });

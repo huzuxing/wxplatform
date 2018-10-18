@@ -1,3 +1,1 @@
-<view class="custom-class van-row" style="{{ style }}">
-  <slot />
-</view>
+<view class="row-class zan-row"><slot></slot></view>

@@ -1,18 +1,13 @@
-import { create } from '../common/create';
+'use strict';
 
-create({
-  props: {
-    size: {
-      type: String,
-      value: '30px'
-    },
+Component({
+  properties: {
     type: {
       type: String,
-      value: 'circular'
+      value: 'circle'
     },
     color: {
-      type: String,
-      value: '#c9c9c9'
+      type: String
     }
   }
 });

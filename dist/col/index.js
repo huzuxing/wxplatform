@@ -1,34 +1,22 @@
-import { create } from '../common/create';
+'use strict';
 
-create({
+Component({
+  externalClasses: ['col-class'],
+
   relations: {
     '../row/index': {
-      type: 'ancestor'
+      type: 'parent'
     }
   },
 
-  props: {
-    span: Number,
-    offset: Number
-  },
-
-  computed: {
-    classes() {
-      const { span, offset } = this.data;
-      return this.classNames('custom-class', 'van-col', {
-        [`van-col--${span}`]: span,
-        [`van-col--${offset}`]: offset
-      });
-    }
-  },
-
-  methods: {
-    setGutter(gutter) {
-      const padding = `${gutter / 2}px`;
-      const style = gutter ? `padding-left: ${padding}; padding-right: ${padding};` : '';
-      if (style !== this.data.style) {
-        this.setData({ style });
-      }
+  properties: {
+    col: {
+      value: 0,
+      type: Number
+    },
+    offset: {
+      value: 0,
+      type: Number
     }
   }
 });

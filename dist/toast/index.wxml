@@ -1,30 +1,30 @@
-<van-overlay
-  show="{{ show && (mask || forbidClick) }}"
-  mask="{{ mask }}"
-  z-index="{{ zIndex }}"
-/>
-<van-transition
-  show="{{ show }}"
-  custom-style="z-index: {{ zIndex }}"
-  custom-class="van-toast__container"
+<view
+  class="zan-toast {{ !message ? 'zan-toast--notitle' : '' }}"
+  wx:if="{{ show }}"
+  bindtap="clearZanToast"
 >
-  <view
-    class="van-toast van-toast--{{ type === 'text' ? 'text' : 'icon' }} van-toast--{{ position }}"
-    catch:touchmove
+  <!-- icon 展示 -->
+  <block
+    wx:if="{{ icon || image }}"
   >
-    <!-- text only -->
-    <view wx:if="{{ type === 'text' }}">{{ message }}</view>
+    <view
+      wx:if="{{ image }}"
+      class="zan-toast__icon zan-toast__icon-image"
+      style="background-image: url({{ image }});"
+    ></view>
+    <view
+      wx:elif="{{ icon === 'loading' }}"
+      class="zan-toast__icon zan-toast__icon-loading"
+    >
+      <view class="zan-loading"></view>
+    </view>
+    <zan-icon
+      wx:else
+      type="{{ icon }}"
+      class="zan-toast__icon"
+    ></zan-icon>
+  </block>
 
-    <!-- with icon -->
-    <block wx:else>
-      <van-loading
-        wx:if="{{ type === 'loading' }}"
-        color="white"
-        type="{{ loadingType }}"
-        custom-class="van-toast__loading"
-      />
-      <van-icon wx:else class="van-toast__icon" name="{{ type }}" />
-      <view wx:if="{{ message }}" class="van-toast__text">{{ message }}</view>
-    </block>
-  </view>
-</van-transition>
+  <!-- 文案展示 -->
+  <view wx:if="{{ message }}">{{ message }}</view>
+</view>

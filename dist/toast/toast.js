@@ -1,72 +1,134 @@
-import { isObj } from '../common/utils';
+'use strict';
 
-const defaultOptions = {
-  type: 'text',
-  mask: false,
-  message: '',
-  show: true,
-  zIndex: 1000,
-  duration: 3000,
-  position: 'middle',
-  forbidClick: false,
-  loadingType: 'circular',
-  selector: '#van-toast'
+var TOAST_CONFIG_KEY = 'zanui.__zanToastPageConfig';
+var DEFAULT_SHOW_TOAST_TIME = 3000;
+
+var timeoutData = {
+  timeoutId: 0,
+  toastCtx: null
 };
 
-let queue = [];
-let currentOptions = { ...defaultOptions };
+var globalToastUserConfig = {};
 
-function parseOptions(message) {
-  return isObj(message) ? message : { message };
-}
+// 获取页面上下文
+function getPageCtx(pageCtx) {
+  var ctx = pageCtx;
 
-function Toast(options = {}) {
-  options = {
-    ...currentOptions,
-    ...parseOptions(options)
-  };
-
-  const pages = getCurrentPages();
-  const ctx = pages[pages.length - 1];
-
-  const toast = ctx.selectComponent(options.selector);
-  delete options.selector;
-
-  queue.push(toast);
-  toast.setData(options);
-  clearTimeout(toast.timer);
-
-  if (options.duration > 0) {
-    toast.timer = setTimeout(() => {
-      toast.clear();
-      queue = queue.filter(item => item !== toast);
-    }, options.duration);
+  if (!ctx) {
+    var pages = getCurrentPages();
+    ctx = pages[pages.length - 1];
   }
 
-  return toast;
+  return ctx;
+}
+
+// 获取当前页面的 toast 配置数据
+function getPageToastConfig(pageCtx) {
+  var zanuiData = pageCtx.data.zanui || {};
+  return zanuiData.__zanToastPageConfig || {};
+}
+
+// Toast 显示函数
+function Toast(optionsOrMsg, pageCtx) {
+  // 参数格式化处理
+  // 如果是文字，默认为 message
+  var options = optionsOrMsg || {};
+  if (typeof optionsOrMsg === 'string') {
+    options = { message: optionsOrMsg };
+  }
+
+  var ctx = getPageCtx(pageCtx);
+  var pageToastUserSetting = getPageToastConfig(ctx);
+  var parsedOptions = Object.assign({}, globalToastUserConfig, pageToastUserSetting, options);
+  var toastCtx = ctx.selectComponent(parsedOptions.selector);
+
+  if (!toastCtx) {
+    console.error('无法找到对应的toast组件，请于页面中注册并在 wxml 中声明 toast 自定义组件');
+    return;
+  }
+
+  if (timeoutData.timeoutId) {
+    Toast.clear();
+  }
+
+  toastCtx.show(Object.assign({}, parsedOptions, {
+    show: true
+  }));
+
+  var timeoutId = 0;
+  // toast 计时，如果小于0，就不会去关闭。
+  // 如果不传，就取默认值
+  var timeoutOption = parsedOptions.timeout || DEFAULT_SHOW_TOAST_TIME;
+  if (timeoutOption >= 0) {
+    timeoutId = setTimeout(function () {
+      toastCtx.clear();
+    }, timeoutOption);
+  }
+
+  timeoutData = {
+    timeoutId: timeoutId,
+    toastCtx: toastCtx
+  };
+}
+
+// 设置 toast 基础属性
+Toast.setDefaultOptions = function () {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'page';
+
+  var parsedDefaultOptions = {
+    selector: options.selector || '',
+    type: options.type || '',
+    icon: options.icon || '',
+    image: options.image || '',
+    timeout: options.timeout || DEFAULT_SHOW_TOAST_TIME
+  };
+
+  if (type === 'global') {
+    globalToastUserConfig = Object.assign({}, parsedDefaultOptions);
+  } else if (type === 'page') {
+    var _ctx$setData;
+
+    var ctx = getPageCtx();
+    ctx.setData((_ctx$setData = {}, _ctx$setData['' + TOAST_CONFIG_KEY] = parsedDefaultOptions, _ctx$setData));
+  }
 };
 
-const createMethod = type => options => Toast({
-  type, ...parseOptions(options)
-});
+// 重置 toast 基础属性
+Toast.resetDefaultOptions = function () {
+  var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'page';
 
-['loading', 'success', 'fail'].forEach(method => {
-  Toast[method] = createMethod(method);
-});
+  if (type === 'global') {
+    globalToastUserConfig = {};
+  } else {
+    var _ctx$setData2;
 
-Toast.clear = all => {
-  queue.forEach(toast => {
-    toast.clear();
-  });
-  queue = [];
+    var ctx = getPageCtx();
+    ctx.setData((_ctx$setData2 = {}, _ctx$setData2['' + TOAST_CONFIG_KEY] = {}, _ctx$setData2));
+  }
 };
 
-Toast.setDefaultOptions = options => {
-  Object.assign(currentOptions, options);
+// 清理所有 toast
+Toast.clear = function () {
+  clearTimeout(timeoutData.timeoutId);
+
+  try {
+    timeoutData.toastCtx && timeoutData.toastCtx.clear();
+  } catch (e) {}
+
+  timeoutData = {
+    timeoutId: 0,
+    toastCtx: null
+  };
 };
 
-Toast.resetDefaultOptions = () => {
-  currentOptions = { ...defaultOptions };
+// 显示 loading
+Toast.loading = function () {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  Toast(Object.assign({}, options, {
+    type: 'loading'
+  }));
 };
 
-export default Toast;
+module.exports = Toast;

@@ -1,127 +1,78 @@
-import { create } from '../common/create';
+'use strict';
 
-create({
-  field: true,
+Component({
+  behaviors: ['wx://form-field'],
 
-  classes: ['input-class'],
+  externalClasses: ['field-class'],
 
-  props: {
-    icon: String,
+  relations: {
+    '../cell-group/index': {
+      type: 'parent'
+    }
+  },
+
+  properties: {
     label: String,
-    error: Boolean,
-    focus: Boolean,
-    center: Boolean,
-    isLink: Boolean,
-    leftIcon: String,
-    disabled: Boolean,
-    autosize: Boolean,
-    readonly: Boolean,
-    required: Boolean,
-    iconClass: String,
-    clearable: Boolean,
-    inputAlign: String,
-    customClass: String,
-    confirmType: String,
-    errorMessage: String,
-    placeholder: String,
-    customStyle: String,
-    useIconSlot: Boolean,
-    useButtonSlot: Boolean,
-    placeholderClass: String,
-    cursorSpacing: {
-      type: Number,
-      value: 50
-    },
-    maxlength: {
-      type: Number,
-      value: -1
-    },
-    value: {
-      type: null,
-      value: ''
-    },
+    title: String,
     type: {
+      type: String,
+      value: 'input'
+    },
+    disabled: Boolean,
+    focus: Boolean,
+    inputType: {
       type: String,
       value: 'text'
     },
-    border: {
-      type: Boolean,
-      value: true
-    },
-    titleWidth: {
+    placeholder: String,
+    mode: {
       type: String,
-      value: '90px'
+      value: 'normal'
+    },
+    right: Boolean,
+    error: Boolean,
+    maxlength: {
+      type: Number,
+      value: 140
     }
   },
 
   data: {
-    focused: false,
-    showClear: false
-  },
-
-  computed: {
-    inputClass() {
-      const { data } = this;
-      return this.classNames('input-class', 'van-field__input', {
-        'van-field--error': data.error,
-        'van-field__textarea': data.type === 'textarea',
-        'van-field__input--disabled': data.disabled,
-        [`van-field--${data.inputAlign}`]: data.inputAlign
-      });
-    }
+    showBorder: true
   },
 
   methods: {
-    onInput(event) {
-      const { value = '' } = event.detail || {};
-      this.$emit('input', value);
-      this.$emit('change', value);
+    handleFieldChange: function handleFieldChange(event) {
+      var _event$detail = event.detail,
+          detail = _event$detail === undefined ? {} : _event$detail;
+      var _detail$value = detail.value,
+          value = _detail$value === undefined ? '' : _detail$value;
+
+      this.setData({ value: value });
+
+      this.triggerEvent('change', Object.assign({}, detail));
+    },
+    handleFieldFocus: function handleFieldFocus(_ref) {
+      var _ref$detail = _ref.detail,
+          detail = _ref$detail === undefined ? {} : _ref$detail;
+
+      this.triggerEvent('focus', Object.assign({}, detail));
+    },
+    handleFieldBlur: function handleFieldBlur(_ref2) {
+      var _ref2$detail = _ref2.detail,
+          detail = _ref2$detail === undefined ? {} : _ref2$detail;
+
+      this.triggerEvent('blur', Object.assign({}, detail));
+    },
+    updateIsLastElement: function updateIsLastElement(isLastField) {
+      var showBorder = true;
+      if (isLastField && this.data.mode === 'normal') {
+        showBorder = false;
+      }
+
       this.setData({
-        value,
-        showClear: this.getShowClear({ value })
+        showBorder: showBorder
       });
-    },
-
-    onFocus(event) {
-      this.$emit('focus', event);
-      this.setData({
-        focused: true,
-        showClear: this.getShowClear({ focused: true })
-      });
-    },
-
-    onBlur(event) {
-      this.focused = false;
-      this.$emit('blur', event);
-      this.setData({
-        focused: false,
-        showClear: this.getShowClear({ focused: false })
-      });
-    },
-
-    onClickIcon() {
-      this.$emit('click-icon');
-    },
-
-    getShowClear(options) {
-      const { focused = this.data.focused, value = this.data.value } = options;
-
-      return (
-        this.data.clearable && focused && value !== '' && !this.data.readonly
-      );
-    },
-
-    onClear() {
-      this.setData({
-        value: '',
-        showClear: this.getShowClear({ value: '' })
-      });
-      this.$emit('input', '');
-      this.$emit('change', '');
-    },
-
-    onConfirm() {
-      this.$emit('confirm', this.data.value);
     }
   }
 });
